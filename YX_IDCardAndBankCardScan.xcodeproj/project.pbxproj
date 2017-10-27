@@ -16,6 +16,7 @@
 		8417EA581FA3383A00F8BB84 /* YX_IDCardAndBankCardScanTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8417EA571FA3383A00F8BB84 /* YX_IDCardAndBankCardScanTests.m */; };
 		8417EA631FA3383A00F8BB84 /* YX_IDCardAndBankCardScanUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8417EA621FA3383A00F8BB84 /* YX_IDCardAndBankCardScanUITests.m */; };
 		8417EA831FA339A100F8BB84 /* YXBankSacnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8417EA821FA339A100F8BB84 /* YXBankSacnViewController.m */; };
+		8417EA8C1FA33BB400F8BB84 /* UIAlertController+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 8417EA8B1FA33BB400F8BB84 /* UIAlertController+Extend.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,12 @@
 		8417EA7E1FA338EC00F8BB84 /* UIImage+Extend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extend.m"; sourceTree = "<group>"; };
 		8417EA811FA339A100F8BB84 /* YXBankSacnViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YXBankSacnViewController.h; sourceTree = "<group>"; };
 		8417EA821FA339A100F8BB84 /* YXBankSacnViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXBankSacnViewController.m; sourceTree = "<group>"; };
+		8417EA851FA33AC700F8BB84 /* BankCardSearch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BankCardSearch.m; sourceTree = "<group>"; };
+		8417EA861FA33AC700F8BB84 /* RectManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RectManager.m; sourceTree = "<group>"; };
+		8417EA871FA33AC700F8BB84 /* RectManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RectManager.h; sourceTree = "<group>"; };
+		8417EA881FA33AC700F8BB84 /* BankCardSearch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankCardSearch.h; sourceTree = "<group>"; };
+		8417EA8A1FA33BB400F8BB84 /* UIAlertController+Extend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Extend.h"; sourceTree = "<group>"; };
+		8417EA8B1FA33BB400F8BB84 /* UIAlertController+Extend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Extend.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +128,7 @@
 				8417EA3F1FA3383A00F8BB84 /* AppDelegate.m */,
 				8417EA411FA3383A00F8BB84 /* ViewController.h */,
 				8417EA421FA3383A00F8BB84 /* ViewController.m */,
+				8417EA841FA33A8C00F8BB84 /* ScanManager */,
 				8417EA7F1FA3393000F8BB84 /* ScanVC */,
 				8417EA441FA3383A00F8BB84 /* Main.storyboard */,
 				8417EA471FA3383A00F8BB84 /* Assets.xcassets */,
@@ -192,6 +200,12 @@
 			children = (
 				8417EA7D1FA338EC00F8BB84 /* UIImage+Extend.h */,
 				8417EA7E1FA338EC00F8BB84 /* UIImage+Extend.m */,
+				8417EA881FA33AC700F8BB84 /* BankCardSearch.h */,
+				8417EA851FA33AC700F8BB84 /* BankCardSearch.m */,
+				8417EA871FA33AC700F8BB84 /* RectManager.h */,
+				8417EA861FA33AC700F8BB84 /* RectManager.m */,
+				8417EA8A1FA33BB400F8BB84 /* UIAlertController+Extend.h */,
+				8417EA8B1FA33BB400F8BB84 /* UIAlertController+Extend.m */,
 			);
 			path = extention;
 			sourceTree = "<group>";
@@ -203,6 +217,13 @@
 				8417EA821FA339A100F8BB84 /* YXBankSacnViewController.m */,
 			);
 			path = ScanVC;
+			sourceTree = "<group>";
+		};
+		8417EA841FA33A8C00F8BB84 /* ScanManager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ScanManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -342,6 +363,7 @@
 				8417EA4E1FA3383A00F8BB84 /* main.m in Sources */,
 				8417EA831FA339A100F8BB84 /* YXBankSacnViewController.m in Sources */,
 				8417EA401FA3383A00F8BB84 /* AppDelegate.m in Sources */,
+				8417EA8C1FA33BB400F8BB84 /* UIAlertController+Extend.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
