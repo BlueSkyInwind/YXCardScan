@@ -17,6 +17,10 @@
 		8417EA631FA3383A00F8BB84 /* YX_IDCardAndBankCardScanUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8417EA621FA3383A00F8BB84 /* YX_IDCardAndBankCardScanUITests.m */; };
 		8417EA831FA339A100F8BB84 /* YXBankSacnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8417EA821FA339A100F8BB84 /* YXBankSacnViewController.m */; };
 		8417EA8C1FA33BB400F8BB84 /* UIAlertController+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 8417EA8B1FA33BB400F8BB84 /* UIAlertController+Extend.m */; };
+		84D43B471FA70595000605B8 /* YXBaseScanManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D43B461FA70595000605B8 /* YXBaseScanManager.m */; };
+		84D43B491FA70E51000605B8 /* libexidcardios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8417EA7B1FA338A300F8BB84 /* libexidcardios.a */; };
+		84D43B4A1FA70E5C000605B8 /* libbankcard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8417EA751FA3389A00F8BB84 /* libbankcard.a */; };
+		84D43B4D1FA733FD000605B8 /* YXScanManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D43B4C1FA733FD000605B8 /* YXScanManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +75,10 @@
 		8417EA881FA33AC700F8BB84 /* BankCardSearch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankCardSearch.h; sourceTree = "<group>"; };
 		8417EA8A1FA33BB400F8BB84 /* UIAlertController+Extend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Extend.h"; sourceTree = "<group>"; };
 		8417EA8B1FA33BB400F8BB84 /* UIAlertController+Extend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Extend.m"; sourceTree = "<group>"; };
+		84D43B451FA70595000605B8 /* YXBaseScanManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YXBaseScanManager.h; sourceTree = "<group>"; };
+		84D43B461FA70595000605B8 /* YXBaseScanManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXBaseScanManager.m; sourceTree = "<group>"; };
+		84D43B4B1FA733FD000605B8 /* YXScanManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YXScanManager.h; sourceTree = "<group>"; };
+		84D43B4C1FA733FD000605B8 /* YXScanManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXScanManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +86,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84D43B4A1FA70E5C000605B8 /* libbankcard.a in Frameworks */,
+				84D43B491FA70E51000605B8 /* libexidcardios.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +115,7 @@
 				8417EA561FA3383A00F8BB84 /* YX_IDCardAndBankCardScanTests */,
 				8417EA611FA3383A00F8BB84 /* YX_IDCardAndBankCardScanUITests */,
 				8417EA3C1FA3383A00F8BB84 /* Products */,
+				84D43B481FA70E51000605B8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -222,8 +233,19 @@
 		8417EA841FA33A8C00F8BB84 /* ScanManager */ = {
 			isa = PBXGroup;
 			children = (
+				84D43B451FA70595000605B8 /* YXBaseScanManager.h */,
+				84D43B461FA70595000605B8 /* YXBaseScanManager.m */,
+				84D43B4B1FA733FD000605B8 /* YXScanManager.h */,
+				84D43B4C1FA733FD000605B8 /* YXScanManager.m */,
 			);
 			path = ScanManager;
+			sourceTree = "<group>";
+		};
+		84D43B481FA70E51000605B8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -363,7 +385,9 @@
 				8417EA4E1FA3383A00F8BB84 /* main.m in Sources */,
 				8417EA831FA339A100F8BB84 /* YXBankSacnViewController.m in Sources */,
 				8417EA401FA3383A00F8BB84 /* AppDelegate.m in Sources */,
+				84D43B471FA70595000605B8 /* YXBaseScanManager.m in Sources */,
 				8417EA8C1FA33BB400F8BB84 /* UIAlertController+Extend.m in Sources */,
+				84D43B4D1FA733FD000605B8 /* YXScanManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,6 +554,11 @@
 				DEVELOPMENT_TEAM = B4V533E2T3;
 				INFOPLIST_FILE = YX_IDCardAndBankCardScan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/YX_IDCardAndBankCardScan/libexidcard",
+					"$(PROJECT_DIR)/YX_IDCardAndBankCardScan/bank_io/exbankcardcore",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hfsj.YX-IDCardAndBankCardScan";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -544,6 +573,11 @@
 				DEVELOPMENT_TEAM = B4V533E2T3;
 				INFOPLIST_FILE = YX_IDCardAndBankCardScan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/YX_IDCardAndBankCardScan/libexidcard",
+					"$(PROJECT_DIR)/YX_IDCardAndBankCardScan/bank_io/exbankcardcore",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hfsj.YX-IDCardAndBankCardScan";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
