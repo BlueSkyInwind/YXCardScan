@@ -21,8 +21,11 @@ typedef enum : NSUInteger {
     IDScanType,
 } YScanType;
 
+typedef void (^ScanResultBuffer)(id imageBuffer) ;
 @interface YXBaseScanManager : NSObject <AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate,AVCaptureMetadataOutputObjectsDelegate>
 
+@property(nonatomic,copy)ScanResultBuffer resultBuffer;
+//扫描类型
 @property(nonatomic,assign)YScanType yScantype;
 //输出流
 @property (nonatomic, strong) AVCaptureVideoDataOutput *videoDataOutput;
@@ -36,5 +39,24 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) AVCaptureDevice * captureDevice;
 // 队列
 @property (nonatomic,strong) dispatch_queue_t queue;
+/**
+ 活跃设备配置
+ 
+ @param device 当前设备
+ */
+-(void)activeDeviceConfigure:(AVCaptureDevice *)device;
+//启动、停止 服务
+-(void)startSession;
+-(void)stopSession;
+//视频采集输出
+-(BOOL)configOutPutAtQueue:(dispatch_queue_t)queue;
+//视频采集输入
+-(BOOL)configActiveInPutQueue:(dispatch_queue_t)queue activeDevice:(AVCaptureDevice *)captureDevice;
+
+//AVCaptureConnection
+-(void)configureConnection;
+// 闪关灯
+- (void)setFlashMode:(AVCaptureTorchMode)flashMode;
+
 
 @end

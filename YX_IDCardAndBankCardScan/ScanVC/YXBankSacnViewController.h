@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface YXBankSacnViewController : UIViewController
+#import "YXBaseScanViewController.h"
+@interface YXBankSacnViewController : YXBaseScanViewController
 
 
 @end

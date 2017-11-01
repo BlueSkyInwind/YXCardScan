@@ -17,6 +17,22 @@
     }
     return _captureSession;
 }
+
+-(void)startSession{
+    if (![self.captureSession isRunning]) {
+        dispatch_async(self.queue, ^{
+            [self.captureSession startRunning];
+        });
+    }
+}
+
+-(void)stopSession{
+    if ([self.captureSession isRunning]) {
+        dispatch_async(self.queue, ^{
+            [self.captureSession stopRunning];
+        });
+    }
+}
 #pragma mark queue
 -(dispatch_queue_t)queue {
     if (_queue == nil) {
@@ -100,8 +116,48 @@
     return true;
 }
 
+#pragma mark - AVCaptureConnection
+-(void)configureConnection{
+    AVCaptureConnection *videoConnection;
+    for (AVCaptureConnection *connection in [self.videoDataOutput connections]) {
+        for (AVCaptureInputPort *port in[connection inputPorts]) {
+            if ([[port mediaType] isEqual:AVMediaTypeVideo]) {
+                videoConnection = connection;
+            }
+        }
+    }
+    if ([videoConnection isVideoStabilizationSupported]) {
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {
+            videoConnection.enablesVideoStabilizationWhenAvailable = YES;
+        }
+        else {
+            videoConnection.preferredVideoStabilizationMode = AVCaptureVideoStabilizationModeAuto;
+        }
+    }
+}
 
+#pragma mark - AVCaptureVideoDataOutputSampleBufferDelegate
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
+    CVPixelBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+    if ([captureOutput isEqual:self.videoDataOutput] && self.resultBuffer  != nil) {
+        self.resultBuffer((__bridge id)(imageBuffer));
+    }
+}
 
+//闪光灯
+-(void)setFlashMode:(AVCaptureTorchMode)torchMode{
+    AVCaptureDevice * activeDevice;
+    if (activeDevice.torchMode != torchMode && [activeDevice isTorchAvailable]) {
+        NSError *error;
+        if ([activeDevice lockForConfiguration:&error]) {
+            activeDevice.torchMode = torchMode;
+            [activeDevice unlockForConfiguration];
+        }
+        else{
+            NSLog(@"%@",error);
+        }
+    }
+}
 
 
 

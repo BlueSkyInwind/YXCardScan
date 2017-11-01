@@ -7,7 +7,22 @@
 //
 
 #import "YXBaseScanManager.h"
+#import "YXScanResultModel.h"
 
 @interface YXScanManager : YXBaseScanManager
+
+#pragma mark - 银行卡
+- (BOOL)configBankScanManager;
+
+#pragma mark - 身份证
+- (BOOL)configIDScanManager;
+
+#pragma mark - 配置初始化
+
+- (void)doSomethingWhenWillDisappear;
+
+- (void)doSomethingWhenWillAppear;
+
+-(void)resetParams;
 
 @end
