@@ -6,7 +6,7 @@
 //  Copyright © 2017年 admin. All rights reserved.
 //
 
-#import "YXScanBacnkCardView.h"
+#import "YXScanBankCardView.h"
 
 // iPhone5/5c/5s/SE 4英寸 屏幕宽高：320*568点 屏幕模式：2x 分辨率：1136*640像素
 #define iPhone5or5cor5sorSE ([UIScreen mainScreen].bounds.size.height == 568.0)
@@ -17,7 +17,7 @@
 // iPhone6 Plus/6s Plus/7 Plus 5.5英寸 屏幕宽高：414*736点 屏幕模式：3x 分辨率：1920*1080像素
 #define iPhone6Plusor6sPlusor7Plus ([UIScreen mainScreen].bounds.size.height == 736.0)
 
-@interface YXScanBacnkCardView (){
+@interface YXScanBankCardView (){
     CAShapeLayer *_bankCardScanningViewLayer;
     NSTimer *_timer;
 }
@@ -25,7 +25,7 @@
 @end
 
 
-@implementation YXScanBacnkCardView
+@implementation YXScanBankCardView
 
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];

@@ -27,6 +27,10 @@ typedef void (^ScanResultBuffer)(id imageBuffer) ;
 @property(nonatomic,copy)ScanResultBuffer resultBuffer;
 //扫描类型
 @property(nonatomic,assign)YScanType yScantype;
+
+@property (nonatomic, assign) BOOL isInProcessing;
+
+@property (nonatomic, assign) BOOL isHasResult;
 //输出流
 @property (nonatomic, strong) AVCaptureVideoDataOutput *videoDataOutput;
 //输入流

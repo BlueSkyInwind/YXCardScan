@@ -50,8 +50,8 @@ static bool initFlag = NO;
     }
 }
 -(void)resetParams{
-    
-    
+    self.isInProcessing = NO;
+    self.isHasResult = NO;
 }
 -(BOOL)configureSession{
     
@@ -69,6 +69,10 @@ static bool initFlag = NO;
 }
 - (void)doResult:(CVImageBufferRef)imageBuffer {
     @synchronized(self) {
+        self.isInProcessing = YES;
+        if (self.isHasResult) {
+            return;
+        }
         CVBufferRetain(imageBuffer);
         if(CVPixelBufferLockBaseAddress(imageBuffer, 0) == kCVReturnSuccess) {
             switch (self.yScantype) {
@@ -147,6 +151,7 @@ static bool initFlag = NO;
         }
     }
     CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
+    self.isInProcessing = NO;
 }
 
 - (void)parseIDCardImageBuffer:(CVImageBufferRef)imageBuffer {
@@ -210,16 +215,14 @@ static bool initFlag = NO;
         }
         
         static YXScanResultModel *lastIdInfo = nil;
-        if (self.verify) {
-            if (lastIdInfo == nil) {
+        if (lastIdInfo == nil) {
+            lastIdInfo = idInfo;
+            idInfo = nil;
+        }
+        else{
+            if (![lastIdInfo isEqual:idInfo]){
                 lastIdInfo = idInfo;
                 idInfo = nil;
-            }
-            else{
-                if (![lastIdInfo isEqual:idInfo]){
-                    lastIdInfo = idInfo;
-                    idInfo = nil;
-                }
             }
         }
         if ([lastIdInfo isOK]) {
@@ -241,6 +244,7 @@ static bool initFlag = NO;
         });
     }
     CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
+    self.isInProcessing = NO;
 }
 
 

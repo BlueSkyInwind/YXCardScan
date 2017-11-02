@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YXScanBacnkCardView : UIView
+@interface YXScanBankCardView : UIView
 
 @end

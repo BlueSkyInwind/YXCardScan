@@ -11,7 +11,6 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "UIAlertController+Extend.h"
 @interface YXBaseScanViewController ()
-
 @end
 
 @implementation YXBaseScanViewController
