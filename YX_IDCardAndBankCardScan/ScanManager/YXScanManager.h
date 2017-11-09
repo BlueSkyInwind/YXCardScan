@@ -8,6 +8,7 @@
 
 #import "YXBaseScanManager.h"
 #import "YXScanResultModel.h"
+#import "YXBankCardModel.h"
 
 @interface YXScanManager : YXBaseScanManager
 
@@ -18,6 +19,8 @@
 - (BOOL)configIDScanManager;
 
 #pragma mark - 配置初始化
+
+-(BOOL)configureSession;
 
 - (void)doSomethingWhenWillDisappear;
 

@@ -21,7 +21,7 @@
     
 }
 -(YXScanManager *)scanManager{
-    if (_scanManager) {
+    if (!_scanManager) {
         _scanManager = [[YXScanManager alloc]init];
     }
     return _scanManager;

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "YXBaseScanViewController.h"
+#import "YXBankCardModel.h"
 @interface YXBankSacnViewController : YXBaseScanViewController
 
 

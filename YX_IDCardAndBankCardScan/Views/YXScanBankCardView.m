@@ -30,6 +30,7 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor clearColor];
         [self addScaningView];
         [self addTimer];
     }
@@ -99,6 +100,7 @@
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     // Drawing code
+    rect = _bankCardScanningViewLayer.frame;
     // 水平扫描线
     CGContextRef context = UIGraphicsGetCurrentContext();
     

@@ -22,9 +22,17 @@ typedef enum : NSUInteger {
 } YScanType;
 
 typedef void (^ScanResultBuffer)(id imageBuffer) ;
+typedef void (^ScanBankCardResult)(id result) ;
+typedef void (^ScanIDCardResult)(id result) ;
+
 @interface YXBaseScanManager : NSObject <AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate,AVCaptureMetadataOutputObjectsDelegate>
 
 @property(nonatomic,copy)ScanResultBuffer resultBuffer;
+
+@property(nonatomic,copy)ScanBankCardResult bankCardesult;
+
+@property(nonatomic,copy)ScanIDCardResult IDCardesult;
+
 //扫描类型
 @property(nonatomic,assign)YScanType yScantype;
 

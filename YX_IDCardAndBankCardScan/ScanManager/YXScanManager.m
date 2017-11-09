@@ -9,6 +9,13 @@
 #import "YXScanManager.h"
 
 @implementation YXScanManager
+#pragma mark - 检测是模拟器还是真机
+#if TARGET_IPHONE_SIMULATOR
+// 是模拟器的话，提示“请使用真机测试！！！”
+
+
+#else
+#pragma mark device
 #pragma mark - 银行卡
 - (BOOL)configBankScanManager {
     self.yScantype = BankScanType;
@@ -33,7 +40,6 @@ static bool initFlag = NO;
         initFlag = YES;
     }
 }
-
 #pragma mark - 配置初始化
 
 - (void)doSomethingWhenWillDisappear {
@@ -62,8 +68,10 @@ static bool initFlag = NO;
     [self configureConnection];
     [self activeDeviceConfigure:self.captureDevice];
     [self.captureSession commitConfiguration];
+    __weak typeof (self) weakSelf = self;
     self.resultBuffer = ^(id imageBuffer) {
-        
+        CVImageBufferRef resimageBuffer = (__bridge CVImageBufferRef)(imageBuffer);
+        [weakSelf doResult:resimageBuffer];
     };
     return true;
 }
@@ -139,14 +147,21 @@ static bool initFlag = NO;
             //匹配银行卡名
             NSString *bank = [BankCardSearch getBankNameByBin:numbers count:charCount];
             
-            NSDictionary * resultDic = [NSDictionary dictionary];
+            NSMutableDictionary * resultDic = [NSMutableDictionary dictionary];
             [resultDic setValue:numberStr forKey:@"bankNumber"];
             [resultDic setValue:bank forKey:@"bankName"];
             [resultDic setValue:subImg forKey:@"bankImage"];
+            
+            YXBankCardModel * bankCardM = [[YXBankCardModel alloc]init];
+            bankCardM.bankName = bank;
+            bankCardM.bankNumber = numberStr;
+            bankCardM.bankImage = subImg;
 
             dispatch_async(dispatch_get_main_queue(), ^{
                 AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-                
+                if (self.bankCardesult) {
+                    self.bankCardesult(bankCardM);
+                }
             });
         }
     }
@@ -247,8 +262,5 @@ static bool initFlag = NO;
     self.isInProcessing = NO;
 }
 
-
-
-
-
+#endif
 @end

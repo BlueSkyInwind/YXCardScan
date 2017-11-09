@@ -15,6 +15,24 @@
 @end
 
 @implementation YXBankSacnViewController
+#pragma mark - 检测是模拟器还是真机
+#if TARGET_IPHONE_SIMULATOR
+// 是模拟器的话，提示“请使用真机测试！！！”
+-(void)viewDidLoad {
+    [super viewDidLoad];
+    self.navigationItem.title = @"银行卡扫描";
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"模拟器没有摄像设备"  message:@"请使用真机测试！！！" preferredStyle:UIAlertControllerStyleActionSheet];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        [self.navigationController popViewControllerAnimated:true];
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+#else
+
+#pragma mark - 懒加载
+#pragma mark device
 
 -(YXScanBankCardView *)scanBankCardView{
     if (!_scanBankCardView) {
@@ -27,13 +45,32 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"银行卡扫描";
-    [self.view insertSubview:self.scanBankCardView atIndex:0];
+     [self.view insertSubview:self.scanBankCardView atIndex:0];
+    self.scanManager.sessionPreset = AVCaptureSessionPresetHigh;
+    if ([self.scanManager configBankScanManager]) {
+        UIView *view = [[UIView alloc] initWithFrame:self.view.bounds];
+        [self.view insertSubview:view atIndex:0];
+        AVCaptureVideoPreviewLayer * previewLayer = [[AVCaptureVideoPreviewLayer alloc]initWithSession:self.scanManager.captureSession];
+        previewLayer.frame = [UIScreen mainScreen].bounds;
+        previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+        [view.layer addSublayer:previewLayer];
 
-    
-    
-    
+        [self.scanManager startSession];
+    }
+    __weak typeof (self) weakSelf = self;
+    self.scanManager.bankCardesult = ^(id result) {
+        YXBankCardModel * model = (YXBankCardModel *)result;
+        [weakSelf showResult:model];
+    };
 }
 
+- (void)showResult:(YXBankCardModel *)result {
+    NSString *message = [NSString stringWithFormat:@"%@\n%@", result.bankName, result.bankNumber];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"扫描结果" message:message preferredStyle:UIAlertControllerStyleActionSheet];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -48,5 +85,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+#endif
 @end
