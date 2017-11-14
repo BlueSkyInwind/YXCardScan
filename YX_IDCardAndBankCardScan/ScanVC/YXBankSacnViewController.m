@@ -8,6 +8,8 @@
 
 #import "YXBankSacnViewController.h"
 #import "YXScanBankCardView.h"
+#import "UIImage+Extend.h"
+#import "YXScanResultViewController.h"
 
 @interface YXBankSacnViewController ()
 @property (nonatomic,strong)YXScanBankCardView * scanBankCardView;
@@ -21,12 +23,12 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"银行卡扫描";
-    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"模拟器没有摄像设备"  message:@"请使用真机测试！！！" preferredStyle:UIAlertControllerStyleActionSheet];
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         [self.navigationController popViewControllerAnimated:true];
     }]];
     [self presentViewController:alert animated:YES completion:nil];
+    
 }
 
 #else
@@ -54,7 +56,6 @@
         previewLayer.frame = [UIScreen mainScreen].bounds;
         previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
         [view.layer addSublayer:previewLayer];
-
         [self.scanManager startSession];
     }
     __weak typeof (self) weakSelf = self;
@@ -65,11 +66,14 @@
 }
 
 - (void)showResult:(YXBankCardModel *)result {
-    NSString *message = [NSString stringWithFormat:@"%@\n%@", result.bankName, result.bankNumber];
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"扫描结果" message:message preferredStyle:UIAlertControllerStyleActionSheet];
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-    }]];
-    [self presentViewController:alert animated:YES completion:nil];
+    YXScanResultViewController * resultVC= [[YXScanResultViewController alloc]init];
+    resultVC.bankCardModel  = result;
+    [self.navigationController pushViewController:resultVC animated:true];
+//    NSString *message = [NSString stringWithFormat:@"%@\n%@", result.bankName, result.bankNumber];
+//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"扫描结果" message:message preferredStyle:UIAlertControllerStyleActionSheet];
+//    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+//    }]];
+//    [self presentViewController:alert animated:YES completion:nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -11,6 +11,8 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "UIAlertController+Extend.h"
 @interface YXBaseScanViewController ()
+// 是否打开手电筒
+@property (nonatomic,assign,getter = isTorchOn) BOOL torchOn;
 @end
 
 @implementation YXBaseScanViewController
@@ -18,8 +20,56 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self addBackItem:[YX_BankCardScanManager shareInstance].backImageName];
+    [self addRightItem];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+}
+- (void)addBackItem:(NSString *)imageName
+{
+    if (@available(iOS 11.0, *)) {
+        UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(popBack)];
+        self.navigationItem.leftBarButtonItem = aBarbi;
+        return;
+    }
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+    UIImage *img = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [btn setImage:img forState:UIControlStateNormal];
+    btn.frame = CGRectMake(0, 0, 45, 44);
+    [btn addTarget:self action:@selector(popBack) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];
+    //    修改距离,距离边缘的
+    UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    spaceItem.width = -15;
+    self.navigationItem.leftBarButtonItems = @[spaceItem,item];
     
 }
+-(void)popBack{
+    if ([YX_BankCardScanManager shareInstance].isPush) {
+        [self.navigationController popViewControllerAnimated:true];
+    }
+    else{
+        [self dismissViewControllerAnimated:true completion:nil];
+    }
+}
+-(void)addRightItem{
+    
+    UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"nav_torch_off"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(addTorchOnTorchClick)];
+    self.navigationItem.rightBarButtonItem = aBarbi;
+    
+}
+-(void)addTorchOnTorchClick{
+    self.torchOn = !self.isTorchOn;
+    if (self.isTorchOn) {
+        self.navigationItem.rightBarButtonItem.image = [[UIImage imageNamed:@"nav_torch_on"] originalImage];
+        [self.scanManager setFlashMode:AVCaptureTorchModeOn];
+    }else{
+        self.navigationItem.rightBarButtonItem.image = [[UIImage imageNamed:@"nav_torch_off"] originalImage];
+        [self.scanManager setFlashMode:AVCaptureTorchModeOff];
+    }
+}
+
 -(YXScanManager *)scanManager{
     if (!_scanManager) {
         _scanManager = [[YXScanManager alloc]init];

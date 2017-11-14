@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "YXBankSacnViewController.h"
-
+#import "YX_BankCardScanManager.h"
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *bankcardBtn;
 
@@ -24,8 +24,13 @@
 
 
 - (IBAction)bankcardScanclick:(id)sender {
-    YXBankSacnViewController * bankScanVC = [[YXBankSacnViewController alloc]init];
-    [self.navigationController pushViewController:bankScanVC animated:true];
+//    YXBankSacnViewController * bankScanVC = [[YXBankSacnViewController alloc]init];
+//    [self.navigationController pushViewController:bankScanVC animated:true];
+    
+    [YX_BankCardScanManager shareInstance].isPush = false;
+    [[YX_BankCardScanManager shareInstance] CardStart:self finish:^(YXBankCardModel * _Nullable result) {
+        NSLog(@"%@",result);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "YXScanManager.h"
-
+#import "YX_BankCardScanManager.h"
 @interface YXBaseScanViewController : UIViewController
 
 @property (nonatomic,strong)YXScanManager * scanManager;

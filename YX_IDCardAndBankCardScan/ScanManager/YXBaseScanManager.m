@@ -146,7 +146,7 @@
 
 //闪光灯
 -(void)setFlashMode:(AVCaptureTorchMode)torchMode{
-    AVCaptureDevice * activeDevice;
+    AVCaptureDevice * activeDevice = self.captureDevice;
     if (activeDevice.torchMode != torchMode && [activeDevice isTorchAvailable]) {
         NSError *error;
         if ([activeDevice lockForConfiguration:&error]) {

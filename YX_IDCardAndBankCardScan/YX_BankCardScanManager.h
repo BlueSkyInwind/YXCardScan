@@ -7,14 +7,33 @@
 //
 
 #import <Foundation/Foundation.h>
-#
-typedef void (^ScanResultBuffer)(id imageBuffer) ;
+#import <UIKit/UIKit.h>
+#import "YX_NagavigationViewController.h"
+#import "YXBankCardModel.h"
 
+typedef  void (^ScanResultBlock)(YXBankCardModel * _Nonnull model);
 @interface YX_BankCardScanManager : NSObject
 
+@property(nonatomic,strong)YXBankCardModel * _Nonnull resultModel;
+@property(nonatomic,copy)ScanResultBlock scanResultBlock;
+
+@property(nonatomic,strong)YX_NagavigationViewController * _Nullable nagavigationVC;
+
+@property(nonatomic,strong)NSString * _Nullable backImageName;
+
+@property(nonatomic,assign)BOOL isPush;
+
++(YX_BankCardScanManager *_Nullable)shareInstance;
+
++(void)relaseSelf;
+
 - (void)CardStart:(nonnull UIViewController *)viewController
-           finish:(void(^ _Nullable)(MGBankCardModel * _Nullable result))finish;
+           finish:(void(^ _Nullable)(YXBankCardModel * _Nullable result))finish;
 
 
 
 @end
+
+
+
+
