@@ -109,23 +109,25 @@
 }
 #pragma mark 未被授权使用相机
 -(void)showAuthorizationDenied {
+    
     NSString *title = @"相机未授权";
     NSString *message = @"请到系统的“设置-隐私-相机”中授权此应用使用您的相机";
-    
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"去设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         // 跳转到该应用的隐私设授权置界面
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil];
     
-    [UIAlertController alertControllerWithTitle:title message:message okAction:okAction cancelAction:cancelAction];
+    UIAlertController * alertC =  [UIAlertController alertControllerWithTitle:title message:message okAction:okAction cancelAction:cancelAction];
+    [self presentViewController:alertC animated:true completion:nil];
 }
 #pragma mark 使用相机设备受限
 -(void)showAuthorizationRestricted {
     NSString *title = @"相机设备受限";
     NSString *message = @"请检查您的手机硬件或设置";
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
-    [UIAlertController alertControllerWithTitle:title message:message okAction:okAction cancelAction:nil];
+   UIAlertController * alertC =  [UIAlertController alertControllerWithTitle:title message:message okAction:okAction cancelAction:nil];
+    [self presentViewController:alertC animated:true completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

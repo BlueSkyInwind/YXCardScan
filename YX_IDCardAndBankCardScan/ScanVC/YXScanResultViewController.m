@@ -27,7 +27,9 @@
     self.bankImage.image = self.bankCardModel.bankImage;
     
     [self addBackItem:[YX_BankCardScanManager shareInstance].backImageName];
+    
 }
+
 - (void)addBackItem:(NSString *)imageName
 {
     
@@ -52,14 +54,15 @@
     self.navigationItem.leftBarButtonItems = @[spaceItem,item];
  
 }
+
 -(void)popBack
 {
     [self.navigationController popViewControllerAnimated:true];
 }
+
 -(void)completeScan{
     [YX_BankCardScanManager shareInstance].resultModel = self.bankCardModel;
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

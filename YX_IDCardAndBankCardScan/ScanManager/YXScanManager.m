@@ -75,6 +75,7 @@ static bool initFlag = NO;
     };
     return true;
 }
+
 - (void)doResult:(CVImageBufferRef)imageBuffer {
     @synchronized(self) {
         self.isInProcessing = YES;
@@ -100,8 +101,8 @@ static bool initFlag = NO;
     }
 }
 
-
 - (void)parseBankImageBuffer:(CVImageBufferRef)imageBuffer {
+    
     size_t width_t= CVPixelBufferGetWidth(imageBuffer);
     size_t height_t = CVPixelBufferGetHeight(imageBuffer);
     // YCbCr与YPbPr则是用来描述数位的影像信号，等都可以称为YUV，彼此有重叠； Y表示明亮度(Luminance、Luma)，U和V则是色度、浓度(Chrominance、Chroma)
@@ -139,7 +140,7 @@ static bool initFlag = NO;
             //将捕获到缓存数据转化为图片
             UIImage *image = [UIImage getImageStream:imageBuffer];
             //截取银行卡区域的图像
-            __block UIImage *subImg = [UIImage getSubImage:subRect inImage:image];
+            __block UIImage *subImg = [UIImage getSubImage:rect inImage:image];
             //获取银行卡上的所有字符
             char *numbers = [RectManager getNumbers];
             //获取银行卡号
@@ -150,7 +151,7 @@ static bool initFlag = NO;
             NSMutableDictionary * resultDic = [NSMutableDictionary dictionary];
             [resultDic setValue:numberStr forKey:@"bankNumber"];
             [resultDic setValue:bank forKey:@"bankName"];
-            [resultDic setValue:subImg forKey:@"bankImage"];
+            [resultDic setValue:image forKey:@"bankImage"];
             
             YXBankCardModel * bankCardM = [[YXBankCardModel alloc]init];
             bankCardM.bankName = bank;

@@ -49,6 +49,7 @@ CGRect rects[64];
     top = (previewHeight-cardh)/2;
     
     return CGRectMake(top+rect.origin.x, left+rect.origin.y, cardh, cardw);
+    
 }
 
 

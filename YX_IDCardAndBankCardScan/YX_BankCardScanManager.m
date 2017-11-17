@@ -52,6 +52,11 @@ static dispatch_once_t onceToken;
         }];
     }
     
+    if (self.scanResultBlock) {
+        self.scanResultBlock = ^(YXBankCardModel * _Nonnull model) {
+            finish(model);
+        };
+    }
 }
 
 

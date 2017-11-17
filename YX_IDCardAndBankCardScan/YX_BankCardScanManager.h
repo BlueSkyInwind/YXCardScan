@@ -15,7 +15,8 @@ typedef  void (^ScanResultBlock)(YXBankCardModel * _Nonnull model);
 @interface YX_BankCardScanManager : NSObject
 
 @property(nonatomic,strong)YXBankCardModel * _Nonnull resultModel;
-@property(nonatomic,copy)ScanResultBlock scanResultBlock;
+
+@property(nonatomic,copy)ScanResultBlock _Nullable scanResultBlock;
 
 @property(nonatomic,strong)YX_NagavigationViewController * _Nullable nagavigationVC;
 

@@ -138,10 +138,26 @@
 
 #pragma mark - AVCaptureVideoDataOutputSampleBufferDelegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
+    [self detectionOfLightIntensity:sampleBuffer];
     CVPixelBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     if ([captureOutput isEqual:self.videoDataOutput] && self.resultBuffer  != nil) {
         self.resultBuffer((__bridge id)(imageBuffer));
     }
+}
+
+#pragma mark - 检测光线 强度
+
+-(void)detectionOfLightIntensity:(CMSampleBufferRef)imageBuffer{
+    
+    CFDictionaryRef metadataDict = CMCopyDictionaryOfAttachments(NULL,imageBuffer, kCMAttachmentMode_ShouldPropagate);
+    NSDictionary *metadata = [[NSMutableDictionary alloc] initWithDictionary:(__bridge NSDictionary*)metadataDict];
+    CFRelease(metadataDict);
+    NSDictionary *exifMetadata = [[metadata objectForKey:(NSString *)kCGImagePropertyExifDictionary] mutableCopy];
+    float brightnessValue = [[exifMetadata objectForKey:(NSString *)kCGImagePropertyExifBrightnessValue] floatValue];
+    
+    NSLog(@"-----环境亮度-----%f",brightnessValue);
+    
+    
 }
 
 //闪光灯
