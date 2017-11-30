@@ -18,14 +18,12 @@
     char code[32];
     NSString *bankName = nil;
     
-    //拿到银行卡号中所有的字符 ,去除空格
     for(i = 0, dlen = 0; i < nCount; ++i) {
         if(numbers[i] == ' ') continue;
         code[dlen++] = numbers[i];
     }
     
     bankName = nil;
-    
     for(i = 0; i < len; i+= 2) {
         const char *ch = strBankBinArray[i];
         slen = strlen(strBankBinArray[i]);
@@ -44,6 +42,7 @@
     }
     return bankName;
 }
+
 
 static  int  BankBinArrayCount[] = {
     0, 0, 0, 0, 0, 19, 16, 0, 0, 0, 16, 0, 0, 0, 16, 0, 0, 0, 16, 0, 0, 0, 0, 16, 16, 0, 0, 16, 0, 0,

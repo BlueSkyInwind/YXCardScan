@@ -23,9 +23,8 @@
 		841BD2DF1FBD64CB00BCB6A7 /* icon_lanjiantou@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 841BD2DE1FBD64CB00BCB6A7 /* icon_lanjiantou@2x.png */; };
 		84260A0B1FA9C5D200F1112A /* YXScanResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84260A0A1FA9C5D200F1112A /* YXScanResultModel.m */; };
 		84260A0F1FA9CCD000F1112A /* YXScanBankCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84260A0E1FA9CCD000F1112A /* YXScanBankCardView.m */; };
+		846014241FCFE40F005911A6 /* YXLibraryResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 846014231FCFE40E005911A6 /* YXLibraryResource.bundle */; };
 		846C87361FB591DF00BE420B /* YX_NagavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 846C87351FB591DF00BE420B /* YX_NagavigationViewController.m */; };
-		84811A9A1FBA8673005A8E48 /* nav_torch_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 84811A991FBA8673005A8E48 /* nav_torch_off.png */; };
-		84811A9C1FBA8680005A8E48 /* nav_torch_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 84811A9B1FBA8680005A8E48 /* nav_torch_on.png */; };
 		84811AA01FBA8B7F005A8E48 /* YXScanResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84811A9E1FBA8B7F005A8E48 /* YXScanResultViewController.m */; };
 		84811AA11FBA8B7F005A8E48 /* YXScanResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84811A9F1FBA8B7F005A8E48 /* YXScanResultViewController.xib */; };
 		8492A13F1FB43CE400438228 /* YX_BankCardScanManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8492A13E1FB43CE400438228 /* YX_BankCardScanManager.m */; };
@@ -94,10 +93,9 @@
 		84260A0A1FA9C5D200F1112A /* YXScanResultModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXScanResultModel.m; sourceTree = "<group>"; };
 		84260A0D1FA9CCD000F1112A /* YXScanBankCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YXScanBankCardView.h; sourceTree = "<group>"; };
 		84260A0E1FA9CCD000F1112A /* YXScanBankCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXScanBankCardView.m; sourceTree = "<group>"; };
+		846014231FCFE40E005911A6 /* YXLibraryResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YXLibraryResource.bundle; sourceTree = "<group>"; };
 		846C87341FB591DF00BE420B /* YX_NagavigationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YX_NagavigationViewController.h; sourceTree = "<group>"; };
 		846C87351FB591DF00BE420B /* YX_NagavigationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YX_NagavigationViewController.m; sourceTree = "<group>"; };
-		84811A991FBA8673005A8E48 /* nav_torch_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_torch_off.png; sourceTree = "<group>"; };
-		84811A9B1FBA8680005A8E48 /* nav_torch_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_torch_on.png; sourceTree = "<group>"; };
 		84811A9D1FBA8B7F005A8E48 /* YXScanResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YXScanResultViewController.h; sourceTree = "<group>"; };
 		84811A9E1FBA8B7F005A8E48 /* YXScanResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXScanResultViewController.m; sourceTree = "<group>"; };
 		84811A9F1FBA8B7F005A8E48 /* YXScanResultViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YXScanResultViewController.xib; sourceTree = "<group>"; };
@@ -182,6 +180,7 @@
 				8417EA491FA3383A00F8BB84 /* LaunchScreen.storyboard */,
 				8417EA4C1FA3383A00F8BB84 /* Info.plist */,
 				8417EA4D1FA3383A00F8BB84 /* main.m */,
+				846014231FCFE40E005911A6 /* YXLibraryResource.bundle */,
 			);
 			path = YX_IDCardAndBankCardScan;
 			sourceTree = "<group>";
@@ -300,8 +299,6 @@
 		84811A981FBA862A005A8E48 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				84811A9B1FBA8680005A8E48 /* nav_torch_on.png */,
-				84811A991FBA8673005A8E48 /* nav_torch_off.png */,
 				841BD2DE1FBD64CB00BCB6A7 /* icon_lanjiantou@2x.png */,
 			);
 			path = Resource;
@@ -422,10 +419,9 @@
 			files = (
 				8417EA4B1FA3383A00F8BB84 /* LaunchScreen.storyboard in Resources */,
 				8417EA481FA3383A00F8BB84 /* Assets.xcassets in Resources */,
-				84811A9A1FBA8673005A8E48 /* nav_torch_off.png in Resources */,
 				8417EA461FA3383A00F8BB84 /* Main.storyboard in Resources */,
-				84811A9C1FBA8680005A8E48 /* nav_torch_on.png in Resources */,
 				841BD2DF1FBD64CB00BCB6A7 /* icon_lanjiantou@2x.png in Resources */,
+				846014241FCFE40F005911A6 /* YXLibraryResource.bundle in Resources */,
 				84811AA11FBA8B7F005A8E48 /* YXScanResultViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

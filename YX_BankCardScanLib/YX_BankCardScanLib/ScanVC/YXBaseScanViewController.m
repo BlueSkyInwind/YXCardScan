@@ -9,7 +9,8 @@
 #import "YXBaseScanViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
-#import "UIAlertController+Extend.h"
+#import "UIImage+Extend.h"
+
 @interface YXBaseScanViewController ()
 // 是否打开手电筒
 @property (nonatomic,assign,getter = isTorchOn) BOOL torchOn;
@@ -25,16 +26,18 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
+    
 }
 - (void)addBackItem:(NSString *)imageName
 {
     if (@available(iOS 11.0, *)) {
-        UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(popBack)];
+        UIBarButtonItem * aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:imageName] imageWithTintColor:[UIColor whiteColor]] style:UIBarButtonItemStylePlain target:self action:@selector(popBack)];
         self.navigationItem.leftBarButtonItem = aBarbi;
         return;
     }
+    
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
-    UIImage *img = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIImage *img = [[UIImage imageNamed:imageName] imageWithTintColor:[UIColor whiteColor]];
     [btn setImage:img forState:UIControlStateNormal];
     btn.frame = CGRectMake(0, 0, 45, 44);
     [btn addTarget:self action:@selector(popBack) forControlEvents:UIControlEventTouchUpInside];
@@ -53,22 +56,27 @@
         [self dismissViewControllerAnimated:true completion:nil];
     }
 }
+
 -(void)addRightItem{
-    NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"YXLibraryResource" ofType:@"bundle"]];
     
-    NSString *imagePath1 = [[NSBundle mainBundle] pathForResource:@"nav_torch_off" ofType:@"png"];
+    NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"YXLibraryResource" ofType:@"bundle"]];
     UIImage *defaultImage = [UIImage imageWithContentsOfFile:[bundle pathForResource:@"nav_torch_off" ofType:@"png"]];
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[defaultImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(addTorchOnTorchClick)];
     self.navigationItem.rightBarButtonItem = aBarbi;
     
 }
+
 -(void)addTorchOnTorchClick{
     self.torchOn = !self.isTorchOn;
     if (self.isTorchOn) {
-        self.navigationItem.rightBarButtonItem.image = [[UIImage imageNamed:@"nav_torch_on"] originalImage];
+        NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"YXLibraryResource" ofType:@"bundle"]];
+        UIImage *defaultImage = [UIImage imageWithContentsOfFile:[bundle pathForResource:@"nav_torch_on" ofType:@"png"]];
+        self.navigationItem.rightBarButtonItem.image = [defaultImage originalImage];
         [self.scanManager setFlashMode:AVCaptureTorchModeOn];
     }else{
-        self.navigationItem.rightBarButtonItem.image = [[UIImage imageNamed:@"nav_torch_off"] originalImage];
+        NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"YXLibraryResource" ofType:@"bundle"]];
+        UIImage *defaultImage = [UIImage imageWithContentsOfFile:[bundle pathForResource:@"nav_torch_off" ofType:@"png"]];
+        self.navigationItem.rightBarButtonItem.image = [defaultImage originalImage];
         [self.scanManager setFlashMode:AVCaptureTorchModeOff];
     }
 }

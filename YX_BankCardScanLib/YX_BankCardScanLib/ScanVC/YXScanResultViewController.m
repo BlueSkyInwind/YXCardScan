@@ -17,10 +17,19 @@
 
 @implementation YXScanResultViewController
 
+- (instancetype)init {
+
+    NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"YXLibraryResource" ofType:@"bundle"]];
+    self = [super initWithNibName:@"YXScanResultViewController" bundle:bundle];
+    return self;
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"扫描结果";
+    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor],NSForegroundColorAttributeName, nil];
     
     self.bankNameLabel.text = self.bankCardModel.bankName;
     self.bankNumLabel.text = self.bankCardModel.bankNumber;
@@ -31,22 +40,25 @@
 }
 
 -(void)configureView{
-        
     
+    
+}
+- (IBAction)sureClick:(id)sender {
+    
+    [YX_BankCardScanManager shareInstance].resultModel = self.bankCardModel;
+    if ( [YX_BankCardScanManager shareInstance].scanResultBlock) {
+        [YX_BankCardScanManager shareInstance].scanResultBlock(self.bankCardModel);
+    }
 }
 
 - (void)addBackItem:(NSString *)imageName
 {
-    
-    UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(completeScan)];
-    self.navigationItem.rightBarButtonItem = aBarbi;
     
     if (@available(iOS 11.0, *)) {
         UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(popBack)];
         self.navigationItem.leftBarButtonItem = aBarbi;
         return;
     }
-    
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
     UIImage *img = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     [btn setImage:img forState:UIControlStateNormal];
@@ -59,7 +71,6 @@
     self.navigationItem.leftBarButtonItems = @[spaceItem,item];
  
 }
-
 -(void)popBack
 {
     [self.navigationController popViewControllerAnimated:true];

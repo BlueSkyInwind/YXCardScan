@@ -139,7 +139,7 @@
 
 #pragma mark - AVCaptureVideoDataOutputSampleBufferDelegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
-    [self detectionOfLightIntensity:sampleBuffer];
+//    [self detectionOfLightIntensity:sampleBuffer];
     CVPixelBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     if ([captureOutput isEqual:self.videoDataOutput] && self.resultBuffer  != nil) {
         self.resultBuffer((__bridge id)(imageBuffer));
@@ -155,7 +155,7 @@
     CFRelease(metadataDict);
     NSDictionary *exifMetadata = [[metadata objectForKey:(NSString *)kCGImagePropertyExifDictionary] mutableCopy];
     float brightnessValue = [[exifMetadata objectForKey:(NSString *)kCGImagePropertyExifBrightnessValue] floatValue];
-//    NSLog(@"-----环境亮度-----%f",brightnessValue);
+    NSLog(@"-----环境亮度-----%f",brightnessValue);
 
 }
 
