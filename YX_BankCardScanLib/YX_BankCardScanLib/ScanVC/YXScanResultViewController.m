@@ -36,7 +36,6 @@
     self.bankImage.image = self.bankCardModel.bankImage;
     
     [self addBackItem:[YX_BankCardScanManager shareInstance].backImageName];
-    
 }
 
 -(void)configureView{
@@ -44,10 +43,14 @@
     
 }
 - (IBAction)sureClick:(id)sender {
-    
     [YX_BankCardScanManager shareInstance].resultModel = self.bankCardModel;
     if ( [YX_BankCardScanManager shareInstance].scanResultBlock) {
         [YX_BankCardScanManager shareInstance].scanResultBlock(self.bankCardModel);
+        if ([YX_BankCardScanManager shareInstance].isPush) {
+            [self.navigationController popToRootViewControllerAnimated:true];
+        }else{
+            [self.navigationController dismissViewControllerAnimated:true completion:nil];
+        }
     }
 }
 

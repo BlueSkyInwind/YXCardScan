@@ -41,7 +41,7 @@ static dispatch_once_t onceToken;
     
     _bankScanVC = [[YXBankSacnViewController alloc]init];
     _nagavigationVC = [[YX_NagavigationViewController alloc]initWithRootViewController:_bankScanVC];
-    
+
 }
 
 -(void)CardStart:(UIViewController *)viewController finish:(ScanResultBlock)finish{
@@ -51,9 +51,7 @@ static dispatch_once_t onceToken;
         [viewController presentViewController:_nagavigationVC animated:true completion:^{
         }];
     }
-    self.scanResultBlock = ^(YXBankCardModel * _Nonnull model) {
-        finish(model);
-    };
+    self.scanResultBlock = finish;
 }
 
 

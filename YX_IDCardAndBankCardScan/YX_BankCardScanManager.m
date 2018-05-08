@@ -51,12 +51,13 @@ static dispatch_once_t onceToken;
         [viewController presentViewController:_nagavigationVC animated:true completion:^{
         }];
     }
+    self.scanResultBlock = finish;
     
-    if (self.scanResultBlock) {
-        self.scanResultBlock = ^(YXBankCardModel * _Nonnull model) {
-            finish(model);
-        };
-    }
+//    if (self.scanResultBlock) {
+//        self.scanResultBlock = ^(YXBankCardModel * _Nonnull model) {
+//            finish(model);
+//        };
+//    }
 }
 
 

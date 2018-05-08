@@ -98,6 +98,7 @@
 }
 
 #pragma mark - AVCaptureDeviceInput
+
 -(BOOL)configActiveInPutQueue:(dispatch_queue_t)queue activeDevice:(AVCaptureDevice *)captureDevice{
     NSError * error;
     AVCaptureDeviceInput * videoInput = [AVCaptureDeviceInput deviceInputWithDevice:captureDevice error:&error];
@@ -128,11 +129,10 @@
         }
     }
     if ([videoConnection isVideoStabilizationSupported]) {
-        if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {
-            videoConnection.enablesVideoStabilizationWhenAvailable = YES;
-        }
-        else {
+        if (@available(iOS 8.0, *)) {
             videoConnection.preferredVideoStabilizationMode = AVCaptureVideoStabilizationModeAuto;
+        }else{
+            videoConnection.enablesVideoStabilizationWhenAvailable = YES;
         }
     }
 }
@@ -156,7 +156,6 @@
     NSDictionary *exifMetadata = [[metadata objectForKey:(NSString *)kCGImagePropertyExifDictionary] mutableCopy];
     float brightnessValue = [[exifMetadata objectForKey:(NSString *)kCGImagePropertyExifBrightnessValue] floatValue];
 //    NSLog(@"-----环境亮度-----%f",brightnessValue);
-
 }
 
 //闪光灯

@@ -46,7 +46,7 @@ static bool initFlag = NO;
 - (void)doSomethingWhenWillDisappear {
     if ([self.captureSession isRunning]) {
         [self stopSession];
-        [self resetParams];
+//        [self resetParams];
     }
 }
 
@@ -133,9 +133,8 @@ static bool initFlag = NO;
     int resultLen = BankCardNV12(result, 512, pixelAddress, cbCrBuffer, width, height, rect.origin.x, rect.origin.y, rect.origin.x+rect.size.width, rect.origin.y+rect.size.height);
     
     if(resultLen > 0) {
-        
         int charCount = [RectManager docode:result len:resultLen];
-        if(charCount > 0) {
+        if(charCount > 0 && self.isHasResult == NO) {
             CGRect subRect = [RectManager getCorpCardRect:width height:height guideRect:rect charCount:charCount];
             self.isHasResult = YES;
             //将捕获到缓存数据转化为图片

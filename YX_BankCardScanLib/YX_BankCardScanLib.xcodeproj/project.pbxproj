@@ -151,6 +151,8 @@
 		847280081FCBA726001FCDB4 /* ScanManager */ = {
 			isa = PBXGroup;
 			children = (
+				847280191FCBA7D9001FCDB4 /* YX_BankCardScanManager.h */,
+				8472801A1FCBA7D9001FCDB4 /* YX_BankCardScanManager.m */,
 				847280091FCBA726001FCDB4 /* YXBaseScanManager.h */,
 				8472800E1FCBA726001FCDB4 /* YXBaseScanManager.m */,
 				8472800D1FCBA726001FCDB4 /* YXBankCardModel.h */,
@@ -227,8 +229,6 @@
 		8492A1331FB43B0700438228 /* YX_BankCardScanLib */ = {
 			isa = PBXGroup;
 			children = (
-				847280191FCBA7D9001FCDB4 /* YX_BankCardScanManager.h */,
-				8472801A1FCBA7D9001FCDB4 /* YX_BankCardScanManager.m */,
 				84727FF31FCBA61C001FCDB4 /* bank_io */,
 				84727FFA1FCBA6B4001FCDB4 /* ScanVC */,
 				847280081FCBA726001FCDB4 /* ScanManager */,

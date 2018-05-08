@@ -12,7 +12,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *bankNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bankNumLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *bankImage;
-
 @end
 
 @implementation YXScanResultViewController
@@ -27,7 +26,6 @@
     self.bankImage.image = self.bankCardModel.bankImage;
     
     [self addBackItem:[YX_BankCardScanManager shareInstance].backImageName];
-    
 }
 
 -(void)configureView{
@@ -37,7 +35,6 @@
 
 - (void)addBackItem:(NSString *)imageName
 {
-    
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(completeScan)];
     self.navigationItem.rightBarButtonItem = aBarbi;
     
@@ -57,7 +54,6 @@
     UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     spaceItem.width = -15;
     self.navigationItem.leftBarButtonItems = @[spaceItem,item];
- 
 }
 
 -(void)popBack
@@ -68,6 +64,11 @@
 -(void)completeScan{
     [YX_BankCardScanManager shareInstance].resultModel = self.bankCardModel;
     [YX_BankCardScanManager shareInstance].scanResultBlock(self.bankCardModel);
+    if ([YX_BankCardScanManager shareInstance].isPush) {
+        [self.navigationController popToRootViewControllerAnimated:true];
+    }else{
+        [self.navigationController dismissViewControllerAnimated:true completion:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

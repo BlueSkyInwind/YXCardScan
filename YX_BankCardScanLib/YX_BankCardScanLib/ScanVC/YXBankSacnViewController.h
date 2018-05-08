@@ -12,4 +12,6 @@
 @interface YXBankSacnViewController : YXBaseScanViewController
 
 
+
+
 @end

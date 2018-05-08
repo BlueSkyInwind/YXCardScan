@@ -88,6 +88,10 @@
     [super viewWillDisappear:animated];
     [self.scanManager doSomethingWhenWillDisappear];
 }
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+}
+
 #pragma mark - 检测摄像头权限
 -(void)checkAuthorizationStatus {
     AVAuthorizationStatus authorizationStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];

@@ -24,7 +24,7 @@
 
 - (IBAction)bankcardScanclick:(id)sender {
     
-    [YX_BankCardScanManager shareInstance].isPush = true;
+    [YX_BankCardScanManager shareInstance].isPush = false;
     [YX_BankCardScanManager shareInstance].backImageName = @"icon_lanjiantou@2x";
     [YX_BankCardScanManager shareInstance].nagavigationVC.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
     [[YX_BankCardScanManager shareInstance] CardStart:self finish:^(YXBankCardModel * _Nullable result) {
