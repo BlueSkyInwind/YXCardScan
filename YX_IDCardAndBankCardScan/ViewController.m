@@ -30,7 +30,6 @@
     [[YX_BankCardScanManager shareInstance] CardStart:self finish:^(YXBankCardModel * _Nullable result) {
         NSLog(@"%@",result);
     }];
-    
 }
 
 - (void)didReceiveMemoryWarning {
